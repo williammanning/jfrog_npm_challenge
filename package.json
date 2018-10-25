@@ -1,0 +1,31 @@
+{
+  "name": "jfrog_test",
+  "version": "1.0.0",
+  "description": "JFrog NPM Demo Oct 2018 ",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/williammanning/jfrog_node_oct_2018.git"
+  },
+  "keywords": [
+    "JFrog",
+    "NPM",
+    "Binaries",
+    "Liquid",
+    "Software"
+  ],
+  "author": "Bill Manning",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/williammanning/jfrog_node_oct_2018/issues"
+  },
+  "homepage": "https://github.com/williammanning/jfrog_node_oct_2018#readme",
+  "dependencies": {
+    "cities": "^1.1.2",
+    "express": "^4.16.4",
+    "http": "*"
+  }
+}
