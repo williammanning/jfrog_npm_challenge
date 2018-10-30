@@ -29,7 +29,7 @@ In the root directory of the project, perform the following steps:
 
 1. Configure Artifactory. Follow the prompts of the `config` command:
 
-`> jfrog rt config`
+` > jfrog rt config`
 
 2. Once the JFrog CLI is configured with Artifactory, we can try and build our project, resolving the dependencies from Artifactory, hoping it will find the modules in GitHub using the remote repository proxying functionality (we'll use the *npm-virt*, which includes *npm-remote*):
 
@@ -37,30 +37,30 @@ In the root directory of the project, perform the following steps:
 
 3. This command installs the project and refers to the npm repository as the source.
 
-`> $jfrog rt npmi npm-virt --build-name=jfrognpmtest --build-number=1.0.0`
+` > $jfrog rt npmi npm-virt --build-name=jfrognpmtest --build-number=1.0.0`
 
 
 ### Now we will add some build information and some other stuff
 
 4. We recommend adding the Git VCS details using the following build-add-git command:
 
-`>$jfrog rt bag jfrognpmtest 1.0.0`
+` >$jfrog rt bag jfrognpmtest 1.0.0`
 
 5. Also, you can collect the environment variables using the following build-collect-env command:
 
-`>$jfrog rt bce jfrognpmtest 1.0.0`
+` >$jfrog rt bce jfrognpmtest 1.0.0`
 
 6. Publish npm Packages
 
 To publish the package, run the following command:
 
-`>$jfrog rt npmp npm-virt --build-name=jfrognpmtest --build-number=1.0.0`
+` >$jfrog rt npmp npm-virt --build-name=jfrognpmtest --build-number=1.0.0`
 
 7. Now it is time to publish the project
 
 Run the following build publish command:
 
-`>$jfrog rt bp jfrognpmtest 1.0.0`
+` >$jfrog rt bp jfrognpmtest 1.0.0`
 
 The npm package will now be displayed in Artifactory.
 
