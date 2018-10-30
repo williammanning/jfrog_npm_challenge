@@ -1,7 +1,7 @@
 # Sample project to demonstrate NPM packages integration with JFrog Artifactory
 
 ## Overview
-NPPM is staple of the Artifactory system.
+NPM is staple of the Artifactory system.
 To work with NPM repositories you need to use [JFrog CLI](https://www.jfrog.com/confluence/display/CLI/CLI+for+JFrog+Artifactory) and NPM.
 
 Using the JFrog CLI, you can:
