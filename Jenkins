@@ -1,0 +1,49 @@
+#!/usr/bin/env groovy
+
+node {
+
+  stage 'Cleanup'
+      cleanWs()
+
+  stage 'Clone'
+      git url: 'https://github.com/williammanning/jfrog_npm_challenge.git'
+
+  stage 'Install JFrog CLI'
+      dir ('./'){
+          sh "curl -fL https://getcli.jfrog.io | sh"
+          sh "chmod +x jfrog"
+      }
+
+  stage 'Configure CLI Artifactory'
+      dir ('./'){
+          sh "./jfrog rt config --url $ARTIFACTORY_URL --user $ARTIFACTORY_USER --apikey $ARTIFACTORY_API_KEY"
+      }
+
+  stage 'Node CLU Build'
+      dir ('./'){
+          sh "npm install shelljs"
+          sh "./jfrog rt npm-install $ARTIFACTORY_NPM_HACK_REPO --build-name=${env.JOB_NAME} --build-number=${env.BUILD_NUMBER}"
+      }
+
+  stage 'Node CLI Publish'
+      sh "./jfrog rt bag ${env.JOB_NAME} ${env.BUILD_NUMBER}"
+      sh "./jfrog rt bce ${env.JOB_NAME} ${env.BUILD_NUMBER}"
+      dir ('./'){
+          sh "./jfrog rt npm-publish $ARTIFACTORY_NPM_HACK_REPO --build-name=${env.JOB_NAME} --build-number=${env.BUILD_NUMBER}"
+          sh "./jfrog rt bp ${env.JOB_NAME} ${env.BUILD_NUMBER}"
+      }
+
+  stage 'CLI Xray Scan'
+    if (XRAY_SCAN == "YES") {
+      dir ('./'){
+          sh "./jfrog rt build-scan ${env.JOB_NAME} ${env.BUILD_NUMBER}"
+      }
+    }
+
+  stage ('Promote') {
+     dir ('./'){
+         sh "./jfrog rt build-promote --source-repo=$ARTIFACTORY_NPM_HACK_REPO --status='Testing' --comment='This is my NPM Hack test' ${env.JOB_NAME} ${env.BUILD_NUMBER} $ARTIFACTORY_NPM_HACK_REPO_PROMOTE"
+     }
+  }
+
+}
