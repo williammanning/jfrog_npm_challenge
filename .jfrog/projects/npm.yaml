@@ -4,5 +4,5 @@ resolver:
     repo: lego-npm-remote
     serverId: soleng-saas
 deployer:
-    repo: lego-npm-virt
+    repo: lego-npm-dev-local
     serverId: soleng-saas
