@@ -74,7 +74,7 @@ Run the following build publish command:
 
 8. Now we are going to perform a build-scan, make sure that you have the build in the index resources in Xray 
 
-'> jf rt build-scan lego-npm-build 1.0.0'
+'> jf build-scan lego-npm-build 1.0.0'
 
 9. Now let go ahead and promote the buuld from Dev to Production 
 
