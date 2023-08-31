@@ -24,6 +24,15 @@ Using the JFrog CLI, you can:
 * Click on *Quick Setup* under *Create Repositories* in your username drop-down menu in Artifactory UI.
 * It will create a remote NPM repository named *npm-remote*, a local Go repository named *npm-local*, and virtual Go repository named *npm-virt*, which will include the *npm-remote* and *npm-local*.
 
+## Artifactory Repos 
+* Local: 
+* lego-npm-dev-local
+* lego-npm-prod-local
+* Remote:
+* lego-npm-remote
+* Virtual:
+* lego-npm-virt
+
 ### Resolve Dependencies and Build the Project Using JFrog CLI
 In the root directory of the project, perform the following steps:
 
@@ -33,34 +42,43 @@ In the root directory of the project, perform the following steps:
 
 2. Once the JFrog CLI is configured with Artifactory, we can try and build our project, resolving the dependencies from Artifactory, hoping it will find the modules in GitHub using the remote repository proxying functionality (we'll use the *npm-virt*, which includes *npm-remote*):
 
+`> jf rt npm-config'
+
 ### Now you are going to build and set your npm-virt as your repo and build via the CLI
 
 3. This command installs the project and refers to the npm repository as the source.
 
-` > jfrog rt npmi npm-virt --build-name=jfrognpmtest --build-number=1.0.0`
-
+`> jf npm install --build-name=lego-npm-build --build-number=1.0.0`
 
 ### Now we will add some build information and some other stuff
 
 4. We recommend adding the Git VCS details using the following build-add-git command:
 
-` > jfrog rt bag jfrognpmtest 1.0.0`
+` > jf rt build-add-git lego-npm-build 1.0.0`
 
 5. Also, you can collect the environment variables using the following build-collect-env command:
 
-` > jfrog rt bce jfrognpmtest 1.0.0`
+` > jf rt build-collect-env lego-npm-build 1.0.0`
 
 6. Publish npm Packages
 
 To publish the package, run the following command:
 
-` > jfrog rt npmp npm-virt --build-name=jfrognpmtest --build-number=1.0.0`
+` > jf rt npm-publish --build-name=lego-npm-build --build-number=1.0.0`
 
 7. Now it is time to publish the project
 
 Run the following build publish command:
 
-` > jfrog rt bp jfrognpmtest 1.0.0`
+` > jf rt build-publish lego-npm-build 1.0.0`
+
+8. Now we are going to perform a build-scan, make sure that you have the build in the index resources in Xray 
+
+'> jf rt build-scan lego-npm-build 1.0.0'
+
+9. Now let go ahead and promote the buuld from Dev to Production 
+
+'> jf rt build-promote lego-npm-build 1.0.0 lego-npm-prod-local --status=production'
 
 The npm package will now be displayed in Artifactory.
 

@@ -1,0 +1,8 @@
+version: 1
+type: npm
+resolver:
+    repo: lego-npm-virt
+    serverId: soleng-saas
+deployer:
+    repo: lego-npm-virt
+    serverId: soleng-saas
