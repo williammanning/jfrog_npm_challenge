@@ -1,3 +1,13 @@
-- name: Setup JFrog CLI
-  uses: jfrog/setup-jfrog-cli@v3.4.0
+name: Push Build to Artifactory
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+   
+    steps:
+      # This action checks out the code from the repository
+      - name: Checkout Code
+        uses: actions/checkout@v2
+
             
