@@ -1,6 +1,6 @@
 {
   "name": "jfrog_test",
-  "version": "1.0.5",
+  "version": "1.0.0",
   "description": "JFrog NPM Demo Oct 2023 ",
   "main": "index.js",
   "scripts": {
