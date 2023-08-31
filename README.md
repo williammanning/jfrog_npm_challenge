@@ -42,7 +42,7 @@ In the root directory of the project, perform the following steps:
 
 2. Once the JFrog CLI is configured with Artifactory, we can try and build our project, resolving the dependencies from Artifactory, hoping it will find the modules in GitHub using the remote repository proxying functionality (we'll use the *npm-virt*, which includes *npm-remote*):
 
-`> jf rt npm-config'
+`> jf npmc --repo-deploy=lego-npm-virt --repo-resolve=lego-npm-remote'
 
 ### Now you are going to build and set your npm-virt as your repo and build via the CLI
 
