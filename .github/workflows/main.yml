@@ -23,4 +23,13 @@ jobs:
 
       - run: |
           jf rt ping
+          jf rt npm-config --repo-deploy=lego-npm-virt —repo-resolve=lego-npm-remote
+          jf npm install --build-name=lego-npm-build --build-number=${{github.run_number}}
+          jf rt build-add-git lego-npm-build ${{github.run_number}}
+          jf rt build-collect-env lego-npm-build ${{github.run_number}}
+          jf rt npm-publish --build-name=lego-npm-build --build-number=${{github.run_number}}
+          jf rt build-publish lego-npm-build ${{github.run_number}}
+          jf rt build-scan lego-npm-build ${{github.run_number}}
+          jf rt build-promote lego-npm-build ${{github.run_number}} lego-npm-prod-local --status=production
+
             
