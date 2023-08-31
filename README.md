@@ -83,3 +83,5 @@ Run the following build publish command:
 The npm package will now be displayed in Artifactory.
 
 After running the build publish command, you can review the build information, and publish the modules and environment variables in Artifactory.
+
+Added GitHub Actions
